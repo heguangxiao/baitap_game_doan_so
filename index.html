@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="showMessage"></div><br/>
+<input id="findNumber" type="button" value="Find Number !" onclick="findNum()" />
+
+<script>
+    let showDiv = document.getElementById('showMessage');
+    let messDiv = '';
+    let arrShow;
+    function createArr() {
+        let arr = [];
+        for (i = 1; i < 101; i++) {
+            arr.push(i);
+        }
+        return arr;
+    }
+
+    arrShow = createArr();
+
+    messDiv += arrShow.join('-');
+
+    let num = Math.floor(Math.random()*101);
+
+    messDiv += '<br/>' + num;
+
+    function checkNum(n) {
+        if (n == num) {
+            alert('OK');
+        } else if (n<num){
+            alert('')
+            for (i = 0 ; i<arrShow.length;i++){
+                if(arrShow[i] == n) {
+                    for (j = 0;j<=i;j++){
+                        arrShow.shift();
+                    }
+                }
+            }
+        } else if (n>num) {
+            for (i=0;i<arrShow.length;i++){
+                if(arrShow[i] == n) {
+                    for (j = arrShow.length;j>i;j--){
+                        arrShow.pop();
+                    }
+                }
+            }
+        }
+        return arrShow;
+    }
+
+    function findNum() {
+        let n = parseInt(prompt('Doan so'),0);
+        messDiv = checkNum(n).join('-');
+        showDiv.innerHTML = messDiv;
+    }
+
+    showDiv.innerHTML = messDiv;
+
+</script>
+</body>
+</html>
